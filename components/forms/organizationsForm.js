@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { FloatingLabel, Form, Button } from 'react-bootstrap';
+import { createOrganization, updateOrganization } from '../../api/organizationData';
 import { useAuth } from '../../utils/context/authContext';
-// import { createOrganization, updateOrganization} from
 
 const initialState = {
   title: '',
@@ -85,16 +85,20 @@ function OrganizationsForm({ obj }) {
         />
       </FloatingLabel>
 
-      {/* TAG CHECKBOX  */}
-      {['checkbox', 'radio'].map((type) => (
-        <div key={`default-${type}`} className="mb-3">
-          <Form.Check // prettier-ignore
-            type={type}
-            id={`default-${type}`}
-            label={`default ${type}`}
-          />
-        </div>
-      ))}
+      <Form.Check
+        className="text-white mb-3"
+        type="switch"
+        id="tag"
+        name="tag"
+        label="On Sale?"
+        checked={formInput.tag}
+        onChange={(e) => {
+          setFormInput((prevState) => ({
+            ...prevState,
+            tag: e.target.checked,
+          }));
+        }}
+      />
 
       {/* SUBMIT BUTTON  */}
       <Button type="submit">{obj?.firebaseKey ? 'Update' : 'Create'} Your Organization</Button>
@@ -117,4 +121,4 @@ OrganizationsForm.defaultProps = {
   obj: initialState,
 };
 
-export default OrganizationsFormForm;
+export default OrganizationsForm;
