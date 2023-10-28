@@ -7,7 +7,7 @@ import { deleteOrganization } from '../api/organizationData';
 function OrganizationCard({ organizationObj, onUpdate }) {
   const deleteThisOrganization = () => {
     if (window.confirm(`Delete this ${organizationObj.name}?`)) {
-      deleteOrganization(organizationObj.firebaseKey).then(() => onUpdate());
+      deleteOrganization(organizationObj.id).then(() => onUpdate());
     }
   };
 
@@ -17,7 +17,7 @@ function OrganizationCard({ organizationObj, onUpdate }) {
       <Card.Body>
         <Card.Title>{organizationObj?.name}</Card.Title>
         <p className="card-text bold">{organizationObj.donation && <span>DONATION<br /></span> } ${organizationObj.amount}</p>
-        <Link href={`/organizations/${organizationObj.firebaseKey}`} passHref>
+        <Link href={`/organizations/${organizationObj.id}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
         </Link>
         <Button variant="danger" onClick={deleteThisOrganization} className="m-2">DELETE</Button>
@@ -33,7 +33,7 @@ OrganizationCard.propTypes = {
     name: PropTypes.string,
     donation: PropTypes.string,
     amount: PropTypes.string,
-    firebaseKey: PropTypes.string,
+    id: PropTypes.string,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };

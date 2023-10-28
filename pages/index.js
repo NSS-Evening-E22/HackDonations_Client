@@ -29,7 +29,7 @@ function Home() {
       </Link>
       <div className="d-flex flex-wrap">
         {organizations.map((organization) => (
-          <OrganizationCard key={organization.firebaseKey} obj={organization} onUpdate={getAllTheOrganizations} />
+          <OrganizationCard key={organization.id} obj={organization} onUpdate={getAllTheOrganizations} />
         ))}
       </div>
       <h1>Hello {user.displayName}! </h1>

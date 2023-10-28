@@ -19,7 +19,7 @@ function OrganizationsForm({ obj }) {
   const { user } = useAuth;
 
   useEffect(() => {
-    if (obj?.firebaseKey) setFormInput(obj);
+    if (obj?.id) setFormInput(obj);
   }, [obj, user]);
 
   const handleChange = (e) => {
@@ -32,12 +32,12 @@ function OrganizationsForm({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.firebaseKey) {
+    if (obj.id) {
       updateOrganization(formInput).then(() => router.push('/routeHere'));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createOrganization(payload).then(({ name }) => {
-        const patchPayload = { firebaseKey: name };
+        const patchPayload = { id: name };
         updateOrganization(patchPayload).then(() => {
           router.push('/routeHere');
         });
@@ -47,7 +47,7 @@ function OrganizationsForm({ obj }) {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <h2 className="text-white mt-5">{obj?.firebaseKey ? 'Update' : 'Create'} Your Organization</h2>
+      <h2 className="text-white mt-5">{obj?.id ? 'Update' : 'Create'} Your Organization</h2>
 
       {/* Title INPUT  */}
       <FloatingLabel controlId="floatingInput1" label="Organization Title" className="mb-3">
@@ -101,7 +101,7 @@ function OrganizationsForm({ obj }) {
       />
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj?.firebaseKey ? 'Update' : 'Create'} Your Organization</Button>
+      <Button type="submit">{obj?.id ? 'Update' : 'Create'} Your Organization</Button>
     </Form>
   );
 }
@@ -113,7 +113,7 @@ OrganizationsForm.propTypes = {
     imageUrl: PropTypes.string,
     tag: PropTypes.string,
     uid: PropTypes.string,
-    firebaseKey: PropTypes.string,
+    id: PropTypes.string,
   }),
 };
 
