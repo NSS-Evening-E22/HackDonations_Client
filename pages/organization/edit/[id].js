@@ -11,7 +11,7 @@ export default function EditDonation() {
 
   useEffect(() => {
     getSingleOrganization(id).then(setEditItem);
-  }, []);
+  }, [id]);
 
   return (<OrganizationsForm obj={editItem} />);
 }
