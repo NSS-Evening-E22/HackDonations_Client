@@ -2,8 +2,8 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getOrganizations = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations.json?orderBy="uid"&equalTo="${uid}"`, {
+const getOrganizations = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/organizations/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -14,7 +14,7 @@ const getOrganizations = (uid) => new Promise((resolve, reject) => {
 });
 
 const deleteOrganization = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations/${id}.json`, {
+  fetch(`${endpoint}/organizations/${id}/remove`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ const deleteOrganization = (id) => new Promise((resolve, reject) => {
 });
 
 const getSingleOrganization = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations/${id}.json`, {
+  fetch(`${endpoint}/organizations/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const getSingleOrganization = (id) => new Promise((resolve, reject) => {
 });
 
 const createOrganization = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations.json`, {
+  fetch(`${endpoint}/organizations/new`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const createOrganization = (payload) => new Promise((resolve, reject) => {
 });
 
 const updateOrganization = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations/${payload.id}.json`, {
+  fetch(`${endpoint}/organizations/${payload.id}/update`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',

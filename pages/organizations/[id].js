@@ -17,7 +17,7 @@ export default function ViewOrganizations() {
       <div className="d-flex flex-column">
         <Image src={organizationDetails.imageUrl} alt={organizationDetails.title} style={{ width: '300px' }} />
       </div>
-      role:
+      Description:
       <p>{organizationDetails.description || ''}</p>
       <hr />
     </div>

@@ -17,14 +17,14 @@ function Home() {
   };
 
   useEffect(() => {
-    getAllTheOrganizations();
+    // getAllTheOrganizations();
   }, []);
 
   return (
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
     >
-      <Link href="/organization/new" passHref>
+      <Link href="/organizations/new" passHref>
         <Button>Add A Organization</Button>
       </Link>
       <div className="d-flex flex-wrap">

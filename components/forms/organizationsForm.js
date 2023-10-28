@@ -10,7 +10,7 @@ const initialState = {
   description: '',
   imageUrl: '',
   tag: '',
-  userId: '',
+  userId: 0,
 };
 
 function OrganizationsForm({ obj }) {
@@ -33,13 +33,13 @@ function OrganizationsForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.id) {
-      updateOrganization(formInput).then(() => router.push(`/organization/${obj.id}`));
+      updateOrganization(formInput).then(() => router.push(`/organizations/${obj.id}/update`));
     } else {
-      const payload = { ...formInput, uid: user.uid };
+      const payload = { ...formInput, userId: user?.uid };
       createOrganization(payload).then(({ name }) => {
         const patchPayload = { id: name };
         updateOrganization(patchPayload).then(() => {
-          router.push('/organization');
+          router.push(`/organizations/${patchPayload.id}/update`);
         });
       });
     }
@@ -62,7 +62,7 @@ function OrganizationsForm({ obj }) {
       </FloatingLabel>
 
       {/* Description INPUT  */}
-      <FloatingLabel controlId="floatingInput1" label="Organization Description" className="mb-3">
+      <FloatingLabel controlId="floatingInput2" label="Organization Description" className="mb-3">
         <Form.Control
           type="text"
           placeholder="Enter a description"
@@ -74,11 +74,11 @@ function OrganizationsForm({ obj }) {
       </FloatingLabel>
 
       {/* IMAGE INPUT  */}
-      <FloatingLabel controlId="floatingInput2" label="Organization Image" className="mb-3">
+      <FloatingLabel controlId="floatingInput3" label="Organization Image" className="mb-3">
         <Form.Control
           type="url"
-          placeholder="Enter an donation url"
-          name="image"
+          placeholder="Enter an Organization url"
+          name="imageUrl"
           value={formInput.imageUrl}
           onChange={handleChange}
           required
@@ -101,7 +101,7 @@ function OrganizationsForm({ obj }) {
       />
 
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj?.id ? 'Update' : 'Create'} Your Organization</Button>
+      <Button type="submit">{obj.id ? 'Update' : 'Create'} Your Organization</Button>
     </Form>
   );
 }
@@ -112,8 +112,8 @@ OrganizationsForm.propTypes = {
     description: PropTypes.string,
     imageUrl: PropTypes.string,
     tag: PropTypes.string,
-    uid: PropTypes.string,
-    id: PropTypes.string,
+    userId: PropTypes.number,
+    id: PropTypes.number,
   }),
 };
 
