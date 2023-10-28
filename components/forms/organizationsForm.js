@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { FloatingLabel, Form, Button } from 'react-bootstrap';
-import { createOrganization, updateOrganization } from '../../api/organizationData';
 import { useAuth } from '../../utils/context/authContext';
+import { createOrganization, updateOrganization } from '../../api/organizationData';
 
 const initialState = {
   title: '',
