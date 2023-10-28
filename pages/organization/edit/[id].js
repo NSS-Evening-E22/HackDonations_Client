@@ -7,10 +7,10 @@ export default function EditDonation() {
   const [editItem, setEditItem] = useState({});
   const router = useRouter();
 
-  const { firebaseKey } = router.query;
+  const { id } = router.query;
 
   useEffect(() => {
-    getSingleOrganization(firebaseKey).then(setEditItem);
+    getSingleOrganization(id).then(setEditItem);
   }, []);
 
   return (<OrganizationsForm obj={editItem} />);

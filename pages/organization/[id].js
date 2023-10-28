@@ -6,11 +6,11 @@ import { getSingleOrganization } from '../../api/organizationData';
 export default function ViewOrganizations() {
   const [organizationDetails, setOrganizationDetails] = useState({});
   const router = useRouter();
-  const { firebaseKey } = router.query;
+  const { id } = router.query;
 
   useEffect(() => {
-    getSingleOrganization(firebaseKey).then(setOrganizationDetails);
-  }, [firebaseKey]);
+    getSingleOrganization(id).then(setOrganizationDetails);
+  }, [id]);
 
   return (
     <div className="mt-5 d-flex flex-wrap">
