@@ -33,13 +33,13 @@ function OrganizationsForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj.id) {
-      updateOrganization(formInput).then(() => router.push('/routeHere'));
+      updateOrganization(formInput).then(() => router.push(`/organization/${obj.id}`));
     } else {
       const payload = { ...formInput, uid: user.uid };
       createOrganization(payload).then(({ name }) => {
         const patchPayload = { id: name };
         updateOrganization(patchPayload).then(() => {
-          router.push('/routeHere');
+          router.push('/organization');
         });
       });
     }
