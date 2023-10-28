@@ -18,5 +18,13 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #fafafa;
+}
+
+.NavBarBackground {
+  background-color: #3B8174;
+}
+
+.NavBarFont {
+  background-color: aliceblue;
 }
