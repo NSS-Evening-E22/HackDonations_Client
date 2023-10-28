@@ -36,7 +36,7 @@ const getSingleOrganization = (id) => new Promise((resolve, reject) => {
 });
 
 const createOrganization = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations.json`, {
+  fetch('https://localhost:7183/organizations.json', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
