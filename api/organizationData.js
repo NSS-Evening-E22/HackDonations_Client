@@ -13,8 +13,8 @@ const getOrganizations = (uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const deleteOrganization = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations/${firebaseKey}.json`, {
+const deleteOrganization = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/organizations/${id}.json`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
@@ -24,8 +24,8 @@ const deleteOrganization = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleOrganization = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations/${firebaseKey}.json`, {
+const getSingleOrganization = (id) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/organizations/${id}.json`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -48,7 +48,7 @@ const createOrganization = (payload) => new Promise((resolve, reject) => {
 });
 
 const updateOrganization = (payload) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations/${payload.firebaseKey}.json`, {
+  fetch(`${endpoint}/organizations/${payload.id}.json`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
