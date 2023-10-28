@@ -37,3 +37,5 @@ OrganizationCard.propTypes = {
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
+
+export default OrganizationCard;
