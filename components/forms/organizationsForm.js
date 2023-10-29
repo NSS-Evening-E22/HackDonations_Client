@@ -35,11 +35,11 @@ function OrganizationsForm({ obj }) {
     if (obj.id) {
       updateOrganization(formInput).then(() => router.push(`/organization/${obj.id}`));
     } else {
-      const payload = { ...formInput, uid: user.uid };
+      const payload = { ...formInput, uid: user?.id };
       createOrganization(payload).then(({ name }) => {
         const patchPayload = { id: name };
         updateOrganization(patchPayload).then(() => {
-          router.push('/organization');
+          router.push('/organizations');
         });
       });
     }
@@ -78,10 +78,9 @@ function OrganizationsForm({ obj }) {
         <Form.Control
           type="url"
           placeholder="Enter an donation url"
-          name="image"
+          name="imageUrl"
           value={formInput.imageUrl}
           onChange={handleChange}
-          required
         />
       </FloatingLabel>
 
@@ -90,7 +89,7 @@ function OrganizationsForm({ obj }) {
         type="switch"
         id="tag"
         name="tag"
-        label="On Sale?"
+        label="Favorite?"
         checked={formInput.tag}
         onChange={(e) => {
           setFormInput((prevState) => ({
