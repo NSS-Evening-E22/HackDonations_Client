@@ -1,4 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
+// eslint-disable react-hooks/exhaustive-deps
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
@@ -20,7 +20,7 @@ function ShowOrganizations() {
 
   return (
     <div className="text-center my-4">
-      <Link href="/organization/new" passHref>
+      <Link href="/organizations/new" passHref>
         <Button>Add an Organization</Button>
       </Link>
       <div className="d-flex flex-wrap">
