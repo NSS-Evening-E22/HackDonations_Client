@@ -81,7 +81,6 @@ function OrganizationsForm({ obj }) {
           name="imageUrl"
           value={formInput.imageUrl}
           onChange={handleChange}
-          required
         />
       </FloatingLabel>
 
@@ -90,7 +89,7 @@ function OrganizationsForm({ obj }) {
         type="switch"
         id="tag"
         name="tag"
-        label="On Sale?"
+        label="Favorite?"
         checked={formInput.tag}
         onChange={(e) => {
           setFormInput((prevState) => ({
