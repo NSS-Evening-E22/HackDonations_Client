@@ -2,8 +2,8 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getOrganizations = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations?orderBy="uid"&equalTo="${id}"`, {
+const getOrganizations = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/organizations`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ const deleteOrganization = (id) => new Promise((resolve, reject) => {
 });
 
 const getSingleOrganization = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations/${id}`, {
+  fetch(`${endpoint}/organization/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
