@@ -3,20 +3,18 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getOrganizations } from '../api/organizationData';
-import { useAuth } from '../utils/context/authContext';
 import OrganizationCard from '../components/OrganizationCard';
 
 function Home() {
-  const { user } = useAuth();
-
   const [organization, setOrganizations] = useState([]);
 
   const getAllTheOrganizations = () => {
-    getOrganizations(user.uid).then(setOrganizations);
+    getOrganizations().then(setOrganizations);
   };
 
   useEffect(() => {
     getAllTheOrganizations();
+    console.log(organization);
   }, []);
 
   return (
@@ -31,7 +29,6 @@ function Home() {
           <OrganizationCard key={organizations.id} organizationObj={organizations} onUpdate={getAllTheOrganizations} />
         ))}
       </div>
-
     </div>
   );
 }

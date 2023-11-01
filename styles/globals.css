@@ -18,5 +18,63 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #fafafa;
+}
+
+.NavBarBackground {
+  background-color: #3B8174;
+  width: 100%;
+}
+
+.SignOut {
+  justify-content: flex-end;
+}
+
+.RenderCards {
+  margin-top: 5em;
+  height: 100vh;
+  background-color: rgb(255, 166, 0);
+}
+
+.RenderTitle {
+  background-color: rgb(255, 0, 64);
+}
+
+.ViewPageHeader {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3em;
+}
+
+.HeaderImage {
+  width: 50%;
+}
+
+.HeaderButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 50%;
+}
+
+.ViewPageDonation {
+  display: flex;
+  flex-direction: row;
+  margin-top: 2em;
+}
+
+.ConfirmImage {
+  display: flex;
+  flex-direction: flex;
+  justify-content: center;
+}
+
+.ConfirmBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ThankYou {
+  color: #219D80;
 }
