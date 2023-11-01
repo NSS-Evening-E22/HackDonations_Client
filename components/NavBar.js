@@ -12,7 +12,12 @@ export default function NavBar() {
       <Container>
         <Link passHref href="/">
           <Navbar.Brand>
-            <Image src="/public/logo.png" />
+            <Image
+              src="/logo.svg"
+              width={160}
+              height={40}
+              alt="GiveLife"
+            />
           </Navbar.Brand>
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -23,9 +28,9 @@ export default function NavBar() {
               <Nav.Link style={{ color: 'white' }}>Home</Nav.Link>
             </Link>
             <Link passHref href="/userProfile">
-              <Nav.Link>User Profile</Nav.Link>
+              <Nav.Link style={{ color: 'white' }}>User Profile</Nav.Link>
             </Link>
-            <Button variant="danger" onClick={signOut}>Sign Out</Button>
+            <Button variant="danger" className="SignOut" onClick={signOut}>Sign Out</Button>
           </Nav>
         </Navbar.Collapse>
       </Container>
