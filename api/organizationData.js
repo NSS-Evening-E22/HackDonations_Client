@@ -2,8 +2,8 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getOrganizations = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations/${id}`, {
+const getOrganizations = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/organizations`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -25,7 +25,7 @@ const deleteOrganization = (id) => new Promise((resolve, reject) => {
 });
 
 const getSingleOrganization = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/organizations/${id}`, {
+  fetch(`${endpoint}/organization/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const getSingleOrganization = (id) => new Promise((resolve, reject) => {
 });
 
 const createOrganization = (payload) => new Promise((resolve, reject) => {
-  fetch('https://localhost:7183/organizations.json', {
+  fetch(`${endpoint}/organizations/new`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

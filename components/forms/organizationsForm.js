@@ -83,22 +83,6 @@ function OrganizationsForm({ obj }) {
           onChange={handleChange}
         />
       </FloatingLabel>
-
-      <Form.Check
-        className="text-white mb-3"
-        type="switch"
-        id="tag"
-        name="tag"
-        label="Favorite?"
-        checked={formInput.tag}
-        onChange={(e) => {
-          setFormInput((prevState) => ({
-            ...prevState,
-            tag: e.target.checked,
-          }));
-        }}
-      />
-
       {/* SUBMIT BUTTON  */}
       <Button type="submit">{obj.id ? 'Update' : 'Create'} Your Organization</Button>
     </Form>
@@ -110,7 +94,6 @@ OrganizationsForm.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     imageUrl: PropTypes.string,
-    tag: PropTypes.string,
     userId: PropTypes.number,
     id: PropTypes.number,
   }),
