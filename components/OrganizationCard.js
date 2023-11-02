@@ -16,7 +16,7 @@ function OrganizationCard({ organizationObj, onUpdate }) {
       <Card.Img variant="top" src={organizationObj?.imageUrl} alt={organizationObj?.title} style={{ height: '300px' }} />
       <Card.Body>
         <Card.Title>{organizationObj?.title}</Card.Title>
-        <p className="card-text bold">{organizationObj?.title && <span>Title<br /></span> } ${organizationObj?.description}</p>
+        <p className="card-text bold">{organizationObj?.title && <span>Title<br /></span> } {organizationObj?.description}</p>
         <Link href={`/organizations/${organizationObj?.id}`} passHref>
           <Button variant="primary" className="m-2">VIEW</Button>
         </Link>

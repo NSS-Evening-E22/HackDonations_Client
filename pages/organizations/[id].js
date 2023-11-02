@@ -39,7 +39,7 @@ export default function ViewOrganizations() {
     setDonationFormData((prevState) => ({
       ...prevState,
       [name]: value,
-      userId: userObj[0].id,
+      userId: userObj[0]?.id,
 
     }));
   };
