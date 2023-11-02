@@ -1,5 +1,9 @@
+import { clientCredentials } from '../utils/client';
+
+const endpoint = clientCredentials.databaseURL;
+
 const getAllDonations = () => new Promise((resolve, reject) => {
-  fetch('https://localhost:7183/donations', {
+  fetch(`${endpoint}/donations`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -10,7 +14,7 @@ const getAllDonations = () => new Promise((resolve, reject) => {
 });
 
 const checkUserID = (id) => new Promise((resolve, reject) => {
-  fetch(`https://localhost:7183/users/return/${id}`, {
+  fetch(`${endpoint}/users/return/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -21,7 +25,7 @@ const checkUserID = (id) => new Promise((resolve, reject) => {
 });
 
 const checkUserUID = (uid) => new Promise((resolve, reject) => {
-  fetch(`https://localhost:7183/users/${uid}`, {
+  fetch(`${endpoint}/users/${uid}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -32,7 +36,7 @@ const checkUserUID = (uid) => new Promise((resolve, reject) => {
 });
 
 const getSingleDonations = (id) => new Promise((resolve, reject) => {
-  fetch(`https://localhost:7183/donations/${id}`, {
+  fetch(`${endpoint}/donations/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -43,7 +47,7 @@ const getSingleDonations = (id) => new Promise((resolve, reject) => {
 });
 
 const getDonationsFromOrganization = (id) => new Promise((resolve, reject) => {
-  fetch(`https://localhost:7183/organizations/${id}/donationlist`, {
+  fetch(`${endpoint}/organizations/${id}/donationlist`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -54,7 +58,7 @@ const getDonationsFromOrganization = (id) => new Promise((resolve, reject) => {
 });
 
 const addDonationToOrganization = (id, payload) => new Promise((resolve, reject) => {
-  fetch(`https://localhost:7183/organizations/${id}/donations`, {
+  fetch(`${endpoint}/organizations/${id}/donations`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -72,7 +76,7 @@ const addDonationToOrganization = (id, payload) => new Promise((resolve, reject)
 });
 
 const deleteDonations = (id) => new Promise((resolve, reject) => {
-  fetch(`https://localhost:7183/donations/${id}/remove`, {
+  fetch(`${endpoint}/donations/${id}/remove`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

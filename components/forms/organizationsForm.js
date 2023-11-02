@@ -35,7 +35,7 @@ function OrganizationsForm({ obj }) {
     if (obj.id) {
       updateOrganization(formInput).then(() => router.push(`/organizations/${obj.id}/update`));
     } else {
-      const payload = { ...formInput, userId: user?.uid };
+      const payload = { ...formInput, userId: user?.id };
       createOrganization(payload).then(({ name }) => {
         const patchPayload = { id: name };
         updateOrganization(patchPayload).then(() => {
