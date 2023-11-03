@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { getSingleOrganization } from '../../../api/organizationData';
 import OrganizationsForm from '../../../components/forms/organizationsForm';
 
-export default function EditDonation() {
+export default function EditOrganization() {
   const [editItem, setEditItem] = useState({});
   const router = useRouter();
 

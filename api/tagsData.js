@@ -3,7 +3,7 @@ import { clientCredentials } from '../utils/client';
 const endpoint = clientCredentials.databaseURL;
 
 const getTags = (id) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/Tags/${id}`, {
+  fetch(`${endpoint}/organizations/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
