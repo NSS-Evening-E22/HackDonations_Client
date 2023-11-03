@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { FloatingLabel, Form, Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { createOrganization, updateOrganization } from '../../api/organizationData';
+// import { checkUser } from '../../utils/auth';
+import { checkUserUID } from '../../api/donationData';
+import { getTags } from '../../api/tagsData';
 
 const initialState = {
   title: '',
@@ -15,19 +18,24 @@ const initialState = {
 
 function OrganizationsForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
+  const [userObj, setUserObj] = useState({});
+  const [tags, setTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [unformattedSelectedTags, setUnformattedSelectedTags] = useState('');
   const router = useRouter();
   const { user } = useAuth;
-
-  useEffect(() => {
-    if (obj?.id) setFormInput(obj);
-  }, [obj, user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
       ...prevState,
       [name]: value,
+      userId: userObj[0].id,
     }));
+  };
+
+  const handleCheckboxChange = (e) => {
+    setUnformattedSelectedTags(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -35,7 +43,7 @@ function OrganizationsForm({ obj }) {
     if (obj.id) {
       updateOrganization(formInput).then(() => router.push(`/organizations/${obj.id}/update`));
     } else {
-      const payload = { ...formInput, userId: user?.id };
+      const payload = { ...formInput, selectedTags };
       createOrganization(payload).then(({ name }) => {
         const patchPayload = { id: name };
         updateOrganization(patchPayload).then(() => {
@@ -44,6 +52,39 @@ function OrganizationsForm({ obj }) {
       });
     }
   };
+
+  // const getCurrentUserId = () => {
+  //   checkUserUID(user.uid).then(setUserObj);
+  //   console.warn('userAuth:', user.uid);
+  //   console.warn('user:', userObj);
+  // };
+
+  useEffect(() => {
+    const getCurrentUserId = () => {
+      checkUserUID(user?.uid).then(setUserObj);
+      console.warn('userAuth:', user?.uid);
+      console.warn('user:', userObj);
+    };
+    if (obj?.id) setFormInput(obj);
+    getCurrentUserId();
+  }, [obj, user?.uid, userObj]);
+
+  useEffect(() => {
+    getTags().then(setTags);
+  }, []);
+
+  useEffect(() => {
+    const tagsSeparatedWithSymbol = unformattedSelectedTags.split('tagsSelected=');
+    console.warn(tagsSeparatedWithSymbol, 'tagsSeparatedWithSymbol');
+    const separatedTags = [];
+    tagsSeparatedWithSymbol.forEach((unseparatedTag) => {
+      const [tag1, tag2] = unseparatedTag.split('&');
+      separatedTags.push(tag1);
+      separatedTags.push(tag2);
+    });
+    console.warn(separatedTags, 'separatedTags');
+    setSelectedTags(separatedTags);
+  }, [unformattedSelectedTags]);
 
   return (
     <Form onSubmit={handleSubmit}>
@@ -83,6 +124,14 @@ function OrganizationsForm({ obj }) {
           onChange={handleChange}
         />
       </FloatingLabel>
+
+      {tags.map((tag) => (
+        <>
+          <input type="checkbox" onChange={handleCheckboxChange} id={tag.id} name="tagsSelected" value={tag.id} checked />
+          <label htmlFor={tag.name}>{tag.name}</label>
+        </>
+      ))}
+
       {/* SUBMIT BUTTON  */}
       <Button type="submit">{obj.id ? 'Update' : 'Create'} Your Organization</Button>
     </Form>

@@ -14,7 +14,7 @@ function Home() {
 
   useEffect(() => {
     getAllTheOrganizations();
-    console.log(organization);
+    console.warn(organization);
   }, []);
 
   return (
