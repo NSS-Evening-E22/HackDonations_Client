@@ -11,15 +11,21 @@ const initialState = {
   imageUrl: '',
   tag: '',
   userId: 0,
+
 };
 
 function OrganizationsForm({ obj }) {
   const [formInput, setFormInput] = useState(initialState);
   const router = useRouter();
   const { user } = useAuth;
+  const getCurrentUserUID = () => {
+    console.warn('user:', obj);
+  };
 
   useEffect(() => {
     if (obj?.id) setFormInput(obj);
+    console.warn(obj.id);
+    getCurrentUserUID();
   }, [obj, user]);
 
   const handleChange = (e) => {
@@ -27,6 +33,7 @@ function OrganizationsForm({ obj }) {
     setFormInput((prevState) => ({
       ...prevState,
       [name]: value,
+      userId: obj[0]?.id,
     }));
   };
 
@@ -35,7 +42,8 @@ function OrganizationsForm({ obj }) {
     if (obj.id) {
       updateOrganization(formInput).then(() => router.push(`/organizations/${obj.id}/update`));
     } else {
-      const payload = { ...formInput, userId: user?.id };
+      const payload = { ...formInput, userId: user?.userId };
+      console.warn(user?.id);
       createOrganization(payload).then(({ name }) => {
         const patchPayload = { id: name };
         updateOrganization(patchPayload).then(() => {
@@ -83,8 +91,19 @@ function OrganizationsForm({ obj }) {
           onChange={handleChange}
         />
       </FloatingLabel>
+
+      <FloatingLabel controlId="floatingInput4" label="User Id" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="userId"
+          name="userId"
+          value={formInput.userId}
+          onChange={handleChange}
+          required
+        />
+      </FloatingLabel>
       {/* SUBMIT BUTTON  */}
-      <Button type="submit">{obj.id ? 'Update' : 'Create'} Your Organization</Button>
+      <Button type="submit">{obj?.id ? 'Update' : 'Create'} Your Organization</Button>
     </Form>
   );
 }
