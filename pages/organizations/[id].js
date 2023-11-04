@@ -77,7 +77,7 @@ export default function ViewOrganizations() {
           <Image src={organizationDetails?.imageUrl} alt={organizationDetails?.title} style={{ width: '300px' }} />
         </div>
         <div className="HeaderButtons">
-          <Button style={{ height: '3em', width: '10em' }}> Edit Page </Button>
+          <Button style={{ height: '3em', width: '10em' }} onClick={() => router.push('../pages/organizations/edit/[id]/')}> Edit Page </Button>
           <Button style={{ height: '3em', width: '10em' }} variant="danger"> Delete Page </Button>
         </div>
       </section>

@@ -42,7 +42,7 @@ const createOrganization = (payload) => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
-  }).then((response) => response.json())
+  }).then((response) => response.text())
     .then((data) => resolve(data))
     .catch(reject);
 });
@@ -54,7 +54,7 @@ const updateOrganization = (payload) => new Promise((resolve, reject) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(payload),
-  }).then((response) => response.json())
+  }).then((response) => response.text())
     .then((data) => resolve(data))
     .catch(reject);
 });

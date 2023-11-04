@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { Button } from 'react-bootstrap';
 import { getOrganizations } from '../api/organizationData';
 import OrganizationCard from '../components/OrganizationCard';
+import { useAuth } from '../utils/context/authContext';
 
 function Home() {
   const [organization, setOrganizations] = useState([]);
+  const { user } = useAuth();
 
   const getAllTheOrganizations = () => {
     getOrganizations().then(setOrganizations);
@@ -16,6 +18,7 @@ function Home() {
     getAllTheOrganizations();
     console.warn(organization);
   }, []);
+  console.log('firebaseUser', user);
 
   return (
     <div

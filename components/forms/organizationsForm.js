@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { FloatingLabel, Form, Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
-import { createOrganization, updateOrganization } from '../../api/organizationData';
+import { createOrganization } from '../../api/organizationData';
 // import { checkUser } from '../../utils/auth';
 import { checkUserUID } from '../../api/donationData';
 import { getTags } from '../../api/tagsData';
@@ -23,16 +23,18 @@ function OrganizationsForm({ obj }) {
   const [selectedTags, setSelectedTags] = useState([]);
   const [unformattedSelectedTags, setUnformattedSelectedTags] = useState('');
   const router = useRouter();
-  const { user } = useAuth;
+  const { user } = useAuth();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
       ...prevState,
       [name]: value,
-      userId: userObj[0].id,
+      userId: userObj[0]?.id,
     }));
   };
+  console.log('thisIsUserObj', userObj);
+  console.log(user);
 
   const handleCheckboxChange = (e) => {
     setUnformattedSelectedTags(e.target.value);
@@ -40,16 +42,18 @@ function OrganizationsForm({ obj }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (obj.id) {
-      updateOrganization(formInput).then(() => router.push(`/organizations/${obj.id}/update`));
-    } else {
+    // if (obj.id) {
+    //   updateOrganization(formInput).then(() => router.push(`/organizations/${obj.id}/update`));
+    // } else
+    {
       const payload = { ...formInput, selectedTags };
-      createOrganization(payload).then(({ name }) => {
-        const patchPayload = { id: name };
-        updateOrganization(patchPayload).then(() => {
-          router.push(`/organizations/${patchPayload.id}/update`);
-        });
-      });
+      createOrganization(payload).then(() => router.push('/'));
+      // .then(({ name }) => {
+      // const patchPayload = { id: name };
+      // updateOrganization(patchPayload).then(() => {
+      //   router.push(`/organizations/${patchPayload.id}/update`);
+      // });
+      // });
     }
   };
 
@@ -62,12 +66,12 @@ function OrganizationsForm({ obj }) {
   useEffect(() => {
     const getCurrentUserId = () => {
       checkUserUID(user?.uid).then(setUserObj);
-      console.warn('userAuth:', user?.uid);
-      console.warn('user:', userObj);
+      console.log('userAuth:', user?.uid);
+      console.log('user:', userObj.uid);
     };
     if (obj?.id) setFormInput(obj);
     getCurrentUserId();
-  }, [obj, user?.uid, userObj]);
+  }, []);
 
   useEffect(() => {
     getTags().then(setTags);
@@ -131,6 +135,17 @@ function OrganizationsForm({ obj }) {
           <label htmlFor={tag.name}>{tag.name}</label>
         </>
       ))}
+
+      {/* <FloatingLabel controlId="floatingInput4" label="userId" className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="userId"
+          name="userId"
+          value={formInput.id} // Replace with your method of obtaining the user's ID
+          onChange={handleChange}
+          readOnly
+        />
+      </FloatingLabel> */}
 
       {/* SUBMIT BUTTON  */}
       <Button type="submit">{obj.id ? 'Update' : 'Create'} Your Organization</Button>
